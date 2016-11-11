@@ -11,7 +11,7 @@ public class DayWeatherData {
         BufferedReader buffer = new BufferedReader(file);
         List<DayData> days = new ArrayList();
 
-        parseWeatherFile(buffer, days);
+        FileParser.parseFile(buffer, days, FILE_WRAPPER_TYPES.DAY, "*");
         buffer.close();
         file.close();
         
@@ -20,18 +20,7 @@ public class DayWeatherData {
         return lowestDay.getDayNumber();
     }
 
-    private static void parseWeatherFile(BufferedReader buffer, List days) throws IOException, NumberFormatException {
-        String fileLine;
-        while((fileLine = buffer.readLine()) != null){
-            fileLine = fileLine.trim();
-            if(fileLine.length() > 0 && Character.isDigit(fileLine.charAt(0))){        
-                fileLine = StringUtils.leaveOneWhiteSpace(fileLine.trim(), "*");
-                addDayToList(fileLine.split(" "), days);
-            }
-        }
-    }
-
-    private static void addDayToList(String[] fileLine, List days) throws NumberFormatException {
+    public static void addDayToList(String[] fileLine, List days) throws NumberFormatException {
         DayData day = new DayData(Integer.parseInt(fileLine[0]), 
                 Integer.parseInt(fileLine[1]), Integer.parseInt(fileLine[2]));
         
@@ -39,6 +28,8 @@ public class DayWeatherData {
     }
     
     private static DayData getDayWithLowestDifference(List<DayData> days){
+        for(DayData d : days)
+            System.out.println("Day: " + d.getDayNumber());
         Collections.sort(days); 
         
         return days.get(0);

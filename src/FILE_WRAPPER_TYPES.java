@@ -1,0 +1,3 @@
+public enum FILE_WRAPPER_TYPES {
+    FOOTBALL, DAY
+}
