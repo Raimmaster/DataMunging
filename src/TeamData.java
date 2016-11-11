@@ -24,6 +24,18 @@ public class TeamData implements Comparable<TeamData> {
         this.differenceInGoals = goalsInFavor - goalsAgainst;
     }
     
+    public String getPosition() {
+        return position;
+    }
+    
+    public String getName() {
+        return name;
+    }
+   
+    public int getDifferenceInGoals() {
+        return differenceInGoals;
+    }
+    
     @Override
     public int compareTo(TeamData opposingTeam) {
         int myDifference = this.getDifferenceInGoals();
@@ -35,17 +47,5 @@ public class TeamData implements Comparable<TeamData> {
             return 1;
         else 
             return -1; 
-    }
-
-    public String getPosition() {
-        return position;
-    }
-    
-    public String getName() {
-        return name;
-    }
-   
-    public int getDifferenceInGoals() {
-        return differenceInGoals;
     }
 }

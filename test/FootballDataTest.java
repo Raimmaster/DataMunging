@@ -26,8 +26,8 @@ public class FootballDataTest {
     
     @Test
     public void testTeamWithSmallestGoalDifference() throws IOException{
-        int difference = FootballData.findSmallestGoalDifference();
-        assertTrue(difference == -34);
+        String team = FootballData.findSmallestGoalDifferenceTeam();
+        assertTrue(team.equals("Leicester"));
     }
     
 }
