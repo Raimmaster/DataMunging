@@ -21,7 +21,7 @@ public class TeamData implements Comparable<TeamData> {
         this.goalsInFavor = goalsInFavor;
         this.goalsAgainst = goalsAgainst;
         this.totalPoints = totalPoints;
-        this.differenceInGoals = goalsInFavor - goalsAgainst;
+        this.differenceInGoals = Math.abs(goalsInFavor - goalsAgainst);
     }
     
     public String getPosition() {

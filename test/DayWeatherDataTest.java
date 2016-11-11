@@ -25,7 +25,9 @@ public class DayWeatherDataTest {
     
     @Test
     public void testDayWithSmallestTempDifference() throws IOException{
-        int dayNumber = DayWeatherData.findSmallestTempDifferenceDay();
+        DayWeatherData data = new DayWeatherData("weather.dat");
+        data.init();
+        int dayNumber = data.findSmallestTempDifferenceDay();
         assertTrue(dayNumber == 14);
     }
 }

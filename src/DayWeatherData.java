@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DayWeatherData {    
-    public static int findSmallestTempDifferenceDay() throws IOException {
-        FileReader file = new FileReader("weather.dat");
-        BufferedReader buffer = new BufferedReader(file);
-        List<DayData> days = new ArrayList();
+public class DayWeatherData extends AbstractFile{    
 
-        FileParser.parseFile(buffer, days, FILE_WRAPPER_TYPES.DAY, "*");
+    public DayWeatherData(String fileName) {
+        super(fileName);
+    }
+    
+    public int findSmallestTempDifferenceDay() throws IOException {
+        List<DayData> days = new ArrayList();
+        FileParser fParser = new FileParser();
+        fParser.parseFile(buffer, days, FILE_WRAPPER_TYPES.DAY, "*");
         buffer.close();
         file.close();
         
@@ -27,7 +30,7 @@ public class DayWeatherData {
         days.add(day);
     }
     
-    private static DayData getDayWithLowestDifference(List<DayData> days){
+    private DayData getDayWithLowestDifference(List<DayData> days){
         for(DayData d : days)
             System.out.println("Day: " + d.getDayNumber());
         Collections.sort(days); 

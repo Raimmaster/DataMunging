@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FootballData {
-      
-    public static String findSmallestGoalDifferenceTeam() throws IOException {
+public class FootballData extends AbstractFile{
+    
+    public FootballData(String fileName) {
+        super(fileName);
+    }
+
+    public String findSmallestGoalDifferenceTeam() throws IOException {
         FileReader file = new FileReader("football.dat");
         BufferedReader buffer = new BufferedReader(file);
         List<TeamData> teams = new ArrayList();
-        FileParser.parseFile(buffer, teams, FILE_WRAPPER_TYPES.FOOTBALL, " -");                
+        FileParser fParser = new FileParser();
+        fParser.parseFile(buffer, teams, FILE_WRAPPER_TYPES.FOOTBALL, " -");                
         buffer.close();
         file.close();
         
