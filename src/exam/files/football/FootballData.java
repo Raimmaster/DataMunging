@@ -1,9 +1,11 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+package exam.files.football;
+
+import files.exam.files.AbstractFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import files.exam.files.*;
 
 public class FootballData extends AbstractFile{
     
@@ -12,13 +14,10 @@ public class FootballData extends AbstractFile{
     }
 
     public String findSmallestGoalDifferenceTeam() throws IOException {
-        FileReader file = new FileReader("football.dat");
-        BufferedReader buffer = new BufferedReader(file);
         List<TeamData> teams = new ArrayList();
-        FileParser fParser = new FileParser();
-        fParser.parseFile(buffer, teams, FILE_WRAPPER_TYPES.FOOTBALL, " -");                
-        buffer.close();
-        file.close();
+        fParser.parseFile(this.buffer, teams, FILE_WRAPPER_TYPES.FOOTBALL, " -");                
+        this.buffer.close();
+        this.file.close();
         
         TeamData lowestDiffTeam = getTeamWithLowestDifference(teams);
         return lowestDiffTeam.getName();

@@ -1,9 +1,11 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+package exam.files.days;
+
+import files.exam.files.AbstractFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import files.exam.files.*;
 
 public class DayWeatherData extends AbstractFile{    
 
@@ -13,13 +15,11 @@ public class DayWeatherData extends AbstractFile{
     
     public int findSmallestTempDifferenceDay() throws IOException {
         List<DayData> days = new ArrayList();
-        FileParser fParser = new FileParser();
-        fParser.parseFile(buffer, days, FILE_WRAPPER_TYPES.DAY, "*");
+        fParser.parseFile(this.buffer, days, FILE_WRAPPER_TYPES.DAY, "*");
         buffer.close();
         file.close();
         
-        DayData lowestDay = getDayWithLowestDifference(days);
-                
+        DayData lowestDay = getDayWithLowestDifference(days);                
         return lowestDay.getDayNumber();
     }
 

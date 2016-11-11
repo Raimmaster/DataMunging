@@ -1,3 +1,5 @@
+package exam.files.football;
+
 public class TeamData implements Comparable<TeamData> {
     private String position;
     private String name;

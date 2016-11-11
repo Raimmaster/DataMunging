@@ -1,3 +1,5 @@
+package exam.files.days;
+
 public class DayData implements Comparable<DayData>{
     private int dayNumber;
     private int maxTemperature;

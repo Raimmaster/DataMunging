@@ -1,3 +1,4 @@
+import exam.files.days.DayWeatherData;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
