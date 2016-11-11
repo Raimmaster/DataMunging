@@ -31,8 +31,6 @@ public class DayWeatherData extends AbstractFile{
     }
     
     private DayData getDayWithLowestDifference(List<DayData> days){
-        for(DayData d : days)
-            System.out.println("Day: " + d.getDayNumber());
         Collections.sort(days); 
         
         return days.get(0);
