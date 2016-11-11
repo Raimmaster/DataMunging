@@ -17,33 +17,41 @@ public class FootballData {
     
     public static int findSmallestGoalDifference() throws IOException {
         FileReader file = new FileReader("football.dat");
-        
         BufferedReader buffer = new BufferedReader(file);
-        String fileLine = null;
         ArrayList<TeamData> teams = new ArrayList();
 
-        while((fileLine = buffer.readLine()) != null){
-            if(Character.isDigit(fileLine.trim().charAt(0))){
-                String newFileLine = leaveOneWhiteSpace(fileLine.trim());
-                String [] footballLine = newFileLine.split(" ");
-                                
-                TeamData team = new TeamData(footballLine[0], 
-                        footballLine[1], Integer.parseInt(footballLine[2]),
-                        Integer.parseInt(footballLine[3]), Integer.parseInt(footballLine[4]), 
-                        Integer.parseInt(footballLine[5]), Integer.parseInt(footballLine[6]), 
-                        Integer.parseInt(footballLine[7]), Integer.parseInt(footballLine[8]));
-                teams.add(team);
-            }     
-        }
+        parseFootballFile(buffer, teams);
         
         TeamData lowestDiffTeam = getTeamWithLowestDifference(teams);
-        System.out.printf("The lowest score is: %d from the team %s with position %s", 
-                lowestDiffTeam.getDifferenceInGoals(), lowestDiffTeam.getName(), lowestDiffTeam.getPosition());
         
         buffer.close();
         file.close();
         
-        return 14;
+        System.out.printf("The lowest score is: %d from the team %s with position %s", 
+                lowestDiffTeam.getDifferenceInGoals(), lowestDiffTeam.getName(), lowestDiffTeam.getPosition());
+        
+        return lowestDiffTeam.getDifferenceInGoals();
+    }
+
+    private static void parseFootballFile(BufferedReader buffer, ArrayList<TeamData> teams) throws IOException, NumberFormatException {
+        String fileLine;
+        while((fileLine = buffer.readLine()) != null){
+            if(Character.isDigit(fileLine.trim().charAt(0))){
+                addTeamToList(fileLine, teams);
+            }
+        }
+    }
+
+    private static void addTeamToList(String fileLine, ArrayList<TeamData> teams) throws NumberFormatException {
+        String newFileLine = leaveOneWhiteSpace(fileLine.trim());
+        String [] footballLine = newFileLine.split(" ");
+        
+        TeamData team = new TeamData(footballLine[0],
+                footballLine[1], Integer.parseInt(footballLine[2]),
+                Integer.parseInt(footballLine[3]), Integer.parseInt(footballLine[4]),
+                Integer.parseInt(footballLine[5]), Integer.parseInt(footballLine[6]),
+                Integer.parseInt(footballLine[7]), Integer.parseInt(footballLine[8]));
+        teams.add(team);
     }
     
     private static TeamData getTeamWithLowestDifference(List<TeamData> teams){

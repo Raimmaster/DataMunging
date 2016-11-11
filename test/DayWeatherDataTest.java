@@ -6,8 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class FootballDataTest {
-    
+public class DayWeatherDataTest {
     @BeforeClass
     public static void setUpClass() {
     }
@@ -25,9 +24,8 @@ public class FootballDataTest {
     }
     
     @Test
-    public void testTeamWithSmallestGoalDifference() throws IOException{
-        int difference = FootballData.findSmallestGoalDifference();
-        assertTrue(difference == -34);
+    public void testDayWithSmallestTempDifference() throws IOException{
+        int dayNumber = DayWeatherData.findSmallestTempDifferenceDay();
+        assertTrue(dayNumber == 14);
     }
-    
 }
