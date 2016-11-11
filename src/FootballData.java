@@ -2,7 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class FootballData {
     
@@ -18,26 +20,35 @@ public class FootballData {
         
         BufferedReader buffer = new BufferedReader(file);
         String fileLine = null;
-        ArrayList<String[]> footballColumns = new ArrayList();
-        //final int amountOfColumns = 9;
+        ArrayList<TeamData> teams = new ArrayList();
+
         while((fileLine = buffer.readLine()) != null){
             if(Character.isDigit(fileLine.trim().charAt(0))){
                 String newFileLine = leaveOneWhiteSpace(fileLine.trim());
-                System.out.println(newFileLine);
                 String [] footballLine = newFileLine.split(" ");
-                footballColumns.add(footballLine);
+                                
+                TeamData team = new TeamData(footballLine[0], 
+                        footballLine[1], Integer.parseInt(footballLine[2]),
+                        Integer.parseInt(footballLine[3]), Integer.parseInt(footballLine[4]), 
+                        Integer.parseInt(footballLine[5]), Integer.parseInt(footballLine[6]), 
+                        Integer.parseInt(footballLine[7]), Integer.parseInt(footballLine[8]));
+                teams.add(team);
             }     
         }
         
-        for(String[] strArr : footballColumns){
-            for(String s : strArr){
-                System.out.println("COL: " +  s);
-            }
-        }
+        TeamData lowestDiffTeam = getTeamWithLowestDifference(teams);
+        System.out.printf("The lowest score is: %d from the team %s with position %s", 
+                lowestDiffTeam.getDifferenceInGoals(), lowestDiffTeam.getName(), lowestDiffTeam.getPosition());
         
         buffer.close();
         file.close();
         
         return 14;
-    }    
+    }
+    
+    private static TeamData getTeamWithLowestDifference(List<TeamData> teams){
+        Collections.sort(teams); 
+        
+        return teams.get(0);
+    }
 }
